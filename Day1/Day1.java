@@ -178,7 +178,7 @@ public class Day1 {
                     }
                     
                     if (i+3 >= current.length()){break;}
-                    System.out.println("Now peeking at: " + current.substring(i, i+4));
+                    System.out.println("Now peeking at: " + current.substring(i, i+3));
                     if (i+4 < current.length()){                   
                         if (current.substring(i, i+5).contains(nums.get(3))){
                             last = "3";
@@ -198,8 +198,8 @@ public class Day1 {
                         }
                      
                     }
-            
-                    else if (i+4 < current.length()){                 
+                        //SOMETIMES WE DONT GET HER?E?!!?!? xtwone3four
+                    else if (i+3 < current.length()){                 
                         if (current.substring(i, i+4).contains(nums.get(1))){
                             last = "1";
                             i=i+3;
