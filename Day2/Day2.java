@@ -10,7 +10,7 @@ import Commons.*;
 
 public class Day2 {
     static String filename;
-    static boolean test = true;
+    static boolean test = false;
     static String day = "Day2";
     static int testanswer1 = 8;
     static int testanswer2 = 0;
@@ -31,7 +31,7 @@ public class Day2 {
                 System.out.println("Test for part 1 failed");
             }
         }
-        
+        /* 
         int answer2 = part2(input);        
         System.out.println("Answer2 is: " + Integer.toString(answer2));
 
@@ -43,12 +43,12 @@ public class Day2 {
                 System.out.println("Test for part 2 failed");
             }
 
-        }
+        }*/
     }
 
     public static int part1(List<String> input) {
         int answer = 0;
-        int red = 20;
+        int red = 12;
         int green = 13;
         int blue = 14;
         ListIterator<String> iterator = input.listIterator();
@@ -56,26 +56,52 @@ public class Day2 {
             String current = iterator.next();
             System.out.println("Currently checking: " + current);
             int gameNum = 0;
+            Boolean gamePossible = true;
             Scanner scan = new Scanner(current);
+            
             String next = scan.next(); //Game
-            System.out.println(next);
-            gameNum = scan.nextInt(); //x     leftover: : x blue, x green, x red
+            
+            next = scan.next();//grabbed game number     leftover: x blue, x green, x red
+            gameNum = Integer.parseInt(next.strip().replaceAll(":","")); //remove leading space and annoying colon
             System.out.println("Current game id is: "+gameNum);
-            scan.next(); // remove :.  now we have 3 sets left separated by ;
+            
             scan.useDelimiter(";");
-            String set1 = scan.next();
-            System.out.println("Set 1 is: " +set1);
-            String set2 = scan.next();
-            System.out.println("Set 2 is: " +set2);
-            String set3 = scan.next();
-            System.out.println("Set 3 is: " +set3);
+            while (scan.hasNext()){
+                String set = scan.next();
+                System.out.println("Set x is: " +set);
+                if (!isSetPossible(set, red, green, blue)){ //if the set was NOT possible the game is not possible
+                    gamePossible = false;
+                }
+            }
+            if (gamePossible){ //if the game was possible, add up it's ID
+                answer = answer+gameNum;
+            }
+            
         }
         return answer;
     }
 
-    public static boolean isGamePossible(String input, int red, int green, int blue ){
-        Boolean answer = false;
-
+    public static boolean isSetPossible(String input, int red, int green, int blue ){
+        Boolean answer = true; //we'll assume set is possible unless we find an impossibility
+        Scanner setscanner = new Scanner(input);
+        setscanner.useDelimiter(",");
+        while (setscanner.hasNext()){
+            //grab number and color and check. if false return false immediately
+            String set = setscanner.next();
+           // System.out.println(set);
+            int number = Integer.parseInt(StringUtils.getDigits(set));
+            String color = set.replaceAll("\\d", "").strip();
+            //System.out.println("Found color: "+color+" and number: " +number);
+            if (color.equals("red") && number > red ){
+                return false;
+            }
+            if (color.equals("green") && number > green ){
+                return false;
+            }
+            if (color.equals("blue") && number > blue ){
+                return false;
+            }
+        }
         return answer;
     }
 
