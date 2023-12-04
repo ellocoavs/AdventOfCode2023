@@ -13,7 +13,7 @@ public class Day2 {
     static boolean test = false;
     static String day = "Day2";
     static int testanswer1 = 8;
-    static int testanswer2 = 0;
+    static int testanswer2 = 2286;
 
     public static void main(String[] args) {
         filename = Tools.setInputfile(test, day);
