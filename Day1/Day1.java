@@ -10,7 +10,7 @@ import Commons.*;
 
 public class Day1 {
     static String filename;
-    static boolean test = true;
+    static boolean test = false;
     static String day = "Day1";
     static int testanswer1 = 142;
     static int testanswer2 = 351;
@@ -139,21 +139,7 @@ public class Day1 {
                             continue;
                         }
                     }
-                    if (i+3 < current.length()){
-                        if (current.substring(i, i+4).contains(nums.get(1))){
-                            first = "1";
-                            System.out.println("First number is: "+first);
-                            last = first;
-                            i=i+1;
-                            continue;
-                            }
-                        if (current.substring(i, i+4).contains(nums.get(2))){
-                            first = "2";
-                            System.out.println("First number is: "+first);
-                            last = first;
-                            i=i+1;
-                            continue;
-                        }
+                    if (i+3 < current.length()){  
                         if (current.substring(i, i+4).contains(nums.get(4))){
                             first = "4";
                             System.out.println("First number is: "+first);
@@ -168,13 +154,6 @@ public class Day1 {
                             i=i+2;
                             continue;
                         }
-                        if (current.substring(i, i+4).contains(nums.get(6))){
-                            first = "6";
-                            System.out.println("First number is: "+first);
-                            last = first;
-                            i=i+1;
-                            continue;
-                        }
                         if (current.substring(i, i+4).contains(nums.get(9))){
                             first = "9";
                             System.out.println("First number is: "+first);
@@ -182,7 +161,30 @@ public class Day1 {
                             i=i+2;
                             continue;
                         }   
-                    } 
+                    }
+                    if (i+2 < current.length()){
+                        if (current.substring(i, i+3).contains(nums.get(1))){
+                            first = "1";
+                            System.out.println("First number is: "+first);
+                            last = first;
+                            i=i+1;
+                            continue;
+                            }
+                        if (current.substring(i, i+3).contains(nums.get(2))){
+                            first = "2";
+                            System.out.println("First number is: "+first);
+                            last = first;
+                            i=i+1;
+                            continue;
+                        }
+                        if (current.substring(i, i+3).contains(nums.get(6))){
+                            first = "6";
+                            System.out.println("First number is: "+first);
+                            last = first;
+                            i=i+1;
+                            continue;
+                        }
+                    }
                 }
                 else { //just checking for last number.
                     if (StringUtils.isNumeric(current.substring(i,i+1))){
@@ -191,7 +193,7 @@ public class Day1 {
                         continue;
                     }
                     
-                    if (i+2 >= current.length()){continue;}
+                    if (i+1 >= current.length()){continue;}
                     System.out.println("Now peeking at: " + current.substring(i, i+2));
                     if (i+4 < current.length()){                   
                         if (current.substring(i, i+5).contains(nums.get(3))){
@@ -200,7 +202,6 @@ public class Day1 {
                             i=i+3;
                             continue;
                         }
-                   
                         if (current.substring(i, i+5).contains(nums.get(7))){
                             last = "7";
                             System.out.println("Last number is: "+last);
@@ -215,20 +216,8 @@ public class Day1 {
                         }
                      
                     }
-                        
                     if (i+3 < current.length()){                 
-                        if (current.substring(i, i+4).contains(nums.get(1))){
-                            last = "1";
-                            System.out.println("Last number is: "+last);
-                            i=i+1;
-                            continue;
-                        }
-                        if (current.substring(i, i+4).contains(nums.get(2))){
-                            last = "2";
-                            System.out.println("Last number is: "+last);
-                            i=i+1;
-                            continue;
-                        }
+                        
                         if (current.substring(i, i+4).contains(nums.get(4))){
                             last = "4";
                             System.out.println("Last number is: "+last);
@@ -241,12 +230,7 @@ public class Day1 {
                             i=i+2;
                             continue;
                         }
-                        if (current.substring(i, i+4).contains(nums.get(6))){
-                            last = "6";
-                            System.out.println("Last number is: "+last);
-                            i=i+1;
-                            continue;
-                        }
+                        
                         if (current.substring(i, i+4).contains(nums.get(9))){
                             last = "9";
                             System.out.println("Last number is: "+last);
@@ -254,6 +238,26 @@ public class Day1 {
                             continue;
                         }
                     }   
+                    if (i+2 < current.length()){
+                        if (current.substring(i, i+3).contains(nums.get(1))){
+                            last = "1";
+                            System.out.println("Last number is: "+last);
+                            i=i+1;
+                            continue;
+                        }
+                        if (current.substring(i, i+3).contains(nums.get(2))){
+                            last = "2";
+                            System.out.println("Last number is: "+last);
+                            i=i+1;
+                            continue;
+                        }
+                        if (current.substring(i, i+3).contains(nums.get(6))){
+                            last = "6";
+                            System.out.println("Last number is: "+last);
+                            i=i+1;
+                            continue;
+                        }
+                    }
                 }
                 //System.out.println("Numbers are now: "+first+last);
             }
