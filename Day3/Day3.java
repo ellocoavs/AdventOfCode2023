@@ -57,30 +57,46 @@ public class Day3 {
         int linecounter = 0; //this is also our y coord
         while (iterator.hasNext()){
             String current = iterator.next();
-            System.out.println("Currently checking: " + current);   //NEED TO REVERSe. FIND ALL NUMBERS INSTEAD. Q_Q
-            for (int x=0; x<current.length();x++){ //loops through line looking at each character to see if its a symbol, so it's X coord
-                if (!Character.isDigit(current.charAt(x)) && !(current.charAt(x) == '.') ){ //not number and not . -> symbol!
-                    coords.add(new Coordinates(x, linecounter));
+            System.out.println("Currently checking: " + current);   //NEED TO REVERSe. FIND ALL NUMBERS INSTEAD. Q_Q MAX 3 digits!
+            for (int x=0; x<current.length();x++){ //loops through line looking at each character to see if its a number
+                if (Character.isDigit(current.charAt(x))){ // is number, now find how many digits are next to it. 0, 1 or 2
+
+                    if (!Character.isDigit(current.charAt(x+1))){//next char is NOT a number -> single digit number
+                        int number = Integer.parseInt(current.substring(x, x));
+                        Coordinates addme = new Coordinates(x, linecounter, 1,number);
+                        addme.isSymbolAttached(input);
+                        coords.add(addme);
+                        x++; // we can skip the next character, becasue it's known not to be a number
+                    }
+                    if (Character.isDigit(current.charAt(x+2))){  //next TWO chars are numbers -> 3 digit number
+                        int number = Integer.parseInt(current.substring(x, x+2));
+                        Coordinates addme = new Coordinates(x, linecounter, 3, number);
+                        addme.isSymbolAttached(input);
+                        coords.add(addme);
+                        x = x + 3; //next 2 chars are numbers, then the one after HAS to not be a number, so skipp al over those.
+                    }
+                    else {
+                        int number = Integer.parseInt(current.substring(x, x+1));
+                        Coordinates addme = new Coordinates(x, linecounter, 2,number);
+                        addme.isSymbolAttached(input);
+                        coords.add(addme);// else 2 digit number
+                        x = x + 2;
+                    }
                 }
             }
             linecounter++;
         }
         //we now have list of coords for ALL symbols. Now we find their touching number. 8 spots to check. COULD BE MULTIPLE
-        for (Coordinates coordinate : coords) {
-            answer += addTouchingNumbers(coordinate,input);
+        for (Coordinates coord : coords) {
+            if (coord.getSymbolAttached()){
+                coord.getNumber();
+            }
+            
         }
         return answer;
     }
 
 
-    private static int addTouchingNumbers(Coordinates coord, List<String> input) {
-        int total = 0;
-        //we check from line numbers y-1 , y , y+1 and x coords x-1, x x+1. excepting x,y. if theres a number we have to go left and right until there's not a number.
-        int y = coord.getY();
-        int x = coord.getX();
-
-        return total;
-    }
 
     private static int part2(List<String> input) {
         int answer = 0;
