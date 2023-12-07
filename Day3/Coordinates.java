@@ -1,6 +1,7 @@
 package Day3;
 
 import java.util.List;
+import org.apache.commons.lang3.*;
 
 public class Coordinates {
     private final int x; //this define the LEFTMOST digit in the number
@@ -33,7 +34,11 @@ public class Coordinates {
     public boolean isSymbolAttached(List<String> input){
         boolean hasSymbol = false;
         //use own x+y coords + length to find the surrounding chars in the input to find out.
+        for (int i = -1;i<=1;i++){ // y+i to check one row up, current and one down
+            if (!(StringUtils.isNumeric(Character.toString(input.get(y+i).charAt(x-1))) && !(input.get(y+i).charAt(x-1) == '.')))){
 
+            }
+        }
 
         return hasSymbol;
     }
